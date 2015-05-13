@@ -1,0 +1,10 @@
+--- Makefile.orig	2015-05-13 11:59:02.000000000 +0100
++++ Makefile	2015-05-13 12:01:46.000000000 +0100
+@@ -100,6 +100,7 @@
+ 	exynos4412-odroidx2.dtb \
+ 	exynos4412-origen.dtb \
+ 	exynos4412-smdk4412.dtb \
++	exynos4412-nanopct1.dts \
+ 	exynos4412-tiny4412.dtb \
+ 	exynos4412-trats2.dtb
+ dtb-$(CONFIG_ARCH_EXYNOS5) += \
