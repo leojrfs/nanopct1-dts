@@ -3,9 +3,9 @@
 #
 
 install:
-	cp patch/exynos4412-nanopct1.dts arch/arm/boot/dts
-	patch arch/arm/boot/dts/Makefile patch/Makefile.patch
+	cp patch/exynos4412-nanopct1.dts ../arch/arm/boot/dts
+	patch ../arch/arm/boot/dts/Makefile patch/Makefile.patch
 
 update:
 	git pull
-	cp patch/exynos4412-nanopct1.dts arch/arm/boot/dts
+	cp patch/exynos4412-nanopct1.dts ../arch/arm/boot/dts
