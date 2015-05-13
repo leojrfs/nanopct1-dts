@@ -147,6 +147,10 @@
 		pinctrl-0 = <&i2c7_bus>;
 	};
 
+	i2c@138E0000 {
+		status = "okay";
+	};
+
 	hdmi_cec: hdmi-cec {
 		samsung,pins = "gpx3-6";
 		samsung,pin-function = <3>;
