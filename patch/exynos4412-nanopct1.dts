@@ -50,7 +50,33 @@
             linux,default-trigger = "mmc0";
 		};
 	};
-	
+
+    regulators {
+		compatible = "simple-bus";
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		reg_sysvdd: regulator@0 {
+			compatible = "regulator-fixed";
+			reg = <0x0>;
+			regulator-name = "sysvdd";
+			regulator-min-microvolt = <5000000>;
+			regulator-max-microvolt = <5000000>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+
+		reg_p3v3: regulator@1 {
+			compatible = "regulator-fixed";
+			reg = <0x1>;
+			regulator-name = "p3v3";
+			regulator-min-microvolt = <3300000>;
+			regulator-max-microvolt = <3300000>;
+			enable-active-high;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+
 	watchdog@10060000 {
 		status = "okay";
 	};
@@ -129,14 +155,18 @@
 		       };
 		};
 	};
+    
+    mixer: mixer@12C10000 {
+		status = "okay";
+	};
 
 	hdmi@12D00000 {
 		hpd-gpio = <&gpx3 7 0>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&hdmi_hpd>;
-		/*vdd-supply = <&ldo8_reg>;
-		vdd_osc-supply = <&ldo10_reg>;
-		vdd_pll-supply = <&ldo8_reg>;*/
+		vdd-supply = <&reg_sysvdd>;
+		vdd_osc-supply = <&reg_sysvdd>;
+		vdd_pll-supply = <&reg_sysvdd>;
 		ddc = <&hdmi_ddc>;
 		status = "okay";
 	};
@@ -157,7 +187,7 @@
 		samsung,pin-pud = <0>;
 		samsung,pin-drv = <0>;
 	};
-
+    
 	fixed-rate-clocks {
 		xxti {
 			compatible = "samsung,clock-xxti";
