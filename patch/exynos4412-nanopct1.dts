@@ -76,6 +76,7 @@
 			regulator-always-on;
 			regulator-boot-on;
 		};
+	};
 
 	watchdog@10060000 {
 		status = "okay";
