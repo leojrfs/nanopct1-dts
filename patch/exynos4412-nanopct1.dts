@@ -168,6 +168,7 @@
 		vdd-supply = <&reg_sysvdd>;
 		vdd_osc-supply = <&reg_sysvdd>;
 		vdd_pll-supply = <&reg_sysvdd>;
+        hdmi-en-supply = <&reg_sysvdd>;
 		ddc = <&hdmi_ddc>;
 		status = "okay";
 	};
