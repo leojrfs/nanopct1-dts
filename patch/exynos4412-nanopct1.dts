@@ -63,7 +63,7 @@
 	sdhci@12530000 {
 		bus-width = <4>;
 		pinctrl-0 = <&sd2_clk &sd2_cmd &sd2_cd &sd2_bus4>;
-		cd-gpios = <&gpk2 2 0>;
+		/* cd-gpios = <&gpk2 2 0>; Check schematic*/
 		pinctrl-names = "default";
 		status = "okay";
 	};
