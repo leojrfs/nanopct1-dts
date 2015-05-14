@@ -75,7 +75,39 @@
 			enable-active-high;
 			regulator-always-on;
 			regulator-boot-on;
+        };
+
+        reg_usb10: usb10@2 {
+			compatible = "regulator-fixed"";
+			reg = <0x2>;
+			regulator-name = "vdd_otg_hsic_1.0V"";
+			regulator-min-microvolt = <1000000>;
+			regulator-max-microvolt = <1000000>;
+			regulator-always-on;
+			regulator-boot-on;
 		};
+
+		reg_usb33: usb33@3 {
+			compatible = "regulator-fixed";
+			reg = <0x3>;
+			regulator-name = "vdd_usb_otg_3.3V";
+			regulator-min-microvolt = <3300000>;
+			regulator-max-microvolt = <3300000>;
+			enable-active-high;
+			regulator-always-on;
+			regulator-boot-on;
+        };
+
+        reg_tmu: tmu@4 {
+			compatible = "regulator-fixed";
+			reg = <0x4>;
+			regulator-name = "vddq_tmu_1.8V";
+			regulator-min-microvolt = <1800000>;
+			regulator-max-microvolt = <1800000>;
+			enable-active-high;
+			regulator-always-on;
+			regulator-boot-on;
+        };
 	};
 
 	watchdog@10060000 {
@@ -84,7 +116,6 @@
 
 	rtc@10070000 {
 		status = "okay";
-		clock-names = "rtc", "rtc_src";
 	};
 
 	sdhci@12530000 {
@@ -110,7 +141,18 @@
 	serial@13830000 {
 		status = "okay";
 	};
+
+    exynos-usbphy@125B0000 {
+		status = "okay";
+	};
 	
+    hsotg@12480000 {
+		dr_mode = "peripheral";
+		status = "okay";
+		vusb_d-supply = <&reg_usb10>;
+		vusb_a-supply = <&reg_usb33>;
+	};
+
 	emmc_pwrseq: pwrseq {
 		pinctrl-0 = <&sd1_cd>;
 		pinctrl-names = "default";
@@ -140,6 +182,7 @@
 
 	tmu@100C0000 {
 		status = "okay";
+        vtmu-supply = <&reg_tmu>;
 	};
 
 	thermal-zones {
@@ -157,8 +200,18 @@
 		};
 	};
     
+    g2d@10800000 {
+		status = "okay";
+	};
+
     mixer: mixer@12C10000 {
 		status = "okay";
+	};
+    
+    codec@13400000 {
+		status = "okay";
+		/*memory-region = <&mfc_left>, <&mfc_right>;
+		memory-region-names = "left", "right";*/
 	};
 
 	hdmi@12D00000 {
@@ -172,6 +225,10 @@
 		ddc = <&hdmi_ddc>;
 		status = "okay";
 	};
+    
+    cec@100B0000 {
+		status = "okay";
+	};
 
 	hdmi_ddc: i2c@138D0000 {
 		status = "okay";
@@ -182,7 +239,7 @@
 	i2c@138E0000 {
 		status = "okay";
 	};
-
+    
 	hdmi_cec: hdmi-cec {
 		samsung,pins = "gpx3-6";
 		samsung,pin-function = <3>;
