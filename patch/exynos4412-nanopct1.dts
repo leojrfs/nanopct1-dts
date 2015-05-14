@@ -33,16 +33,16 @@
 		#size-cells = <1>;
 		ranges;
 
-		mfc_left: region@77000000 {
+		mfc_left: region@51000000 {
 			compatible = "shared-dma-pool";
-			reusable;
-			reg = <0x77000000 0x1000000>;
+			no-map;
+			reg = <0x51000000 0x800000>;
 		};
 
-		mfc_right: region@78000000 {
+		mfc_right: region@43000000 {
 			compatible = "shared-dma-pool";
-			reusable;
-			reg = <0x78000000 0x1000000>;
+			no-map;
+			reg = <0x43000000 0x800000>;
 		};
 	};
 
@@ -162,6 +162,7 @@
 
     exynos-usbphy@125B0000 {
 		status = "okay";
+        phy-supply = <&sysvdd>;
 	};
 	
     hsotg@12480000 {
@@ -264,6 +265,10 @@
 		status = "okay";
 	};
     
+    fimd@11c00000 {
+		status = "okay";
+    }
+
     codec@13400000 {
 		status = "okay";
 		memory-region = <&mfc_left>, <&mfc_right>;
