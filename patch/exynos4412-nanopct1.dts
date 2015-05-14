@@ -36,13 +36,13 @@
 		mfc_left: region@51000000 {
 			compatible = "shared-dma-pool";
 			no-map;
-			reg = <0x51000000 0x800000>;
+			reg = <0x51000000 0x4000000>;
 		};
 
 		mfc_right: region@43000000 {
 			compatible = "shared-dma-pool";
 			no-map;
-			reg = <0x43000000 0x800000>;
+			reg = <0x43000000 0x4000000>;
 		};
 	};
 
