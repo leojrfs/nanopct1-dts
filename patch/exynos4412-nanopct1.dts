@@ -116,7 +116,7 @@
 			regulator-boot-on;
         };
 
-        reg_tmu: tmu@4 {
+        reg_tmuvdd: tmuvdd@4 {
 			compatible = "regulator-fixed";
 			reg = <0x4>;
 			regulator-name = "vddq_tmu_1.8V";
@@ -162,7 +162,7 @@
 
     exynos-usbphy@125B0000 {
 		status = "okay";
-        phy-supply = <&sysvdd>;
+        phy-supply = <&reg_sysvdd>;
 	};
 	
     hsotg@12480000 {
@@ -201,7 +201,7 @@
 
 	tmu@100C0000 {
 		status = "okay";
-        vtmu-supply = <&reg_tmu>;
+        vtmu-supply = <&reg_tmuvdd>;
 	};
 
 	thermal-zones {
@@ -267,7 +267,7 @@
     
     fimd@11c00000 {
 		status = "okay";
-    }
+    };
 
     codec@13400000 {
 		status = "okay";
