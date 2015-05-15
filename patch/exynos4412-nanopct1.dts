@@ -28,24 +28,6 @@
 		reg = <0x40000000 0x3FF00000>;
 	};
 	
-    reserved-memory {
-		#address-cells = <1>;
-		#size-cells = <1>;
-		ranges;
-
-		mfc_left: region@51000000 {
-			compatible = "shared-dma-pool";
-			no-map;
-			reg = <0x51000000 0x4000000>;
-		};
-
-		mfc_right: region@43000000 {
-			compatible = "shared-dma-pool";
-			no-map;
-			reg = <0x43000000 0x4000000>;
-		};
-	};
-
 	firmware@0204F000 {
 		compatible = "samsung,secure-firmware";
 		reg = <0x0204F000 0x1000>;
@@ -162,7 +144,6 @@
 
     exynos-usbphy@125B0000 {
 		status = "okay";
-        phy-supply = <&reg_sysvdd>;
 	};
 	
     hsotg@12480000 {
@@ -199,25 +180,25 @@
 		status = "okay";
 	};
 
-	tmu@100C0000 {
+	/*tmu@100C0000 {
 		status = "okay";
         vtmu-supply = <&reg_tmuvdd>;
-	};
+	};*/
 
-	thermal-zones {
+	/*thermal-zones {
 		cpu_thermal: cpu-thermal {
 			cooling-maps {
-				map0 {
+				map0 {*/
 				     /* Corresponds to 800MHz at freq_table */
-				     cooling-device = <&cpu0 7 7>;
+				     /*cooling-device = <&cpu0 7 7>;
 				};
-				map1 {
+				map1 {*/
 				     /* Corresponds to 200MHz at freq_table */
-				     cooling-device = <&cpu0 13 13>;
+				     /*cooling-device = <&cpu0 13 13>;
 			       };
 		       };
 		};
-	};
+	};*/
     
     g2d@10800000 {
 		status = "okay";
@@ -259,6 +240,13 @@
 			assigned-clock-parents = <&clock CLK_MOUT_MPLL_USER_T>;
 			assigned-clock-rates = <0>, <176000000>;
 		};
+        fimc_lite_0: fimc-lite@12390000 {
+			status = "okay";
+		};
+
+		fimc_lite_1: fimc-lite@123A0000 {
+			status = "okay";
+		};
 	};
 
     mixer: mixer@12C10000 {
@@ -266,13 +254,15 @@
 	};
     
     fimd@11c00000 {
+        pinctrl-0 = <&lcd_clk &lcd_data24 &pwm1_out>;
+		pinctrl-names = "default";
 		status = "okay";
     };
 
     codec@13400000 {
-		status = "okay";
-		memory-region = <&mfc_left>, <&mfc_right>;
-		memory-region-names = "left", "right";
+		samsung,mfc-r = <0x43000000 0x800000>;
+		samsung,mfc-l = <0x51000000 0x800000>;
+        status = "okay";
 	};
 
 	hdmi@12D00000 {
